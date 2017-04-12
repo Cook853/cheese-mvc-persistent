@@ -2,6 +2,7 @@ package org.launchcode.models;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.persistence.Entity;
@@ -24,6 +25,7 @@ public class Cheese {
     @Size(min=1, message = "Description must not be empty")
     private String description;
 
+    @ManyToOne
     private Category category;
 
     public Cheese(String name, String description) {

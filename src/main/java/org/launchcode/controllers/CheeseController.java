@@ -23,7 +23,10 @@ import javax.validation.Valid;
 public class CheeseController {
 
     @Autowired
-    private CheeseDao cheeseDao;
+    CheeseDao cheeseDao;
+
+    @Autowired
+    CategoryDao categoryDao;
 
     // Request path: /cheese
     @RequestMapping(value = "")
@@ -39,16 +42,21 @@ public class CheeseController {
     public String displayAddCheeseForm(Model model) {
         model.addAttribute("title", "Add Cheese");
         model.addAttribute("cheese", new Cheese());
-//        model.addAttribute("categories", .values());
+        model.addAttribute("categories", categoryDao.findAll());
         return "cheese/add";
     }
 
     @RequestMapping(value = "add", method = RequestMethod.POST)
     public String processAddCheeseForm(@ModelAttribute @Valid Cheese newCheese,
-                                       Errors errors, Model model) {
+                                       Errors errors, @RequestParam int categoryId,
+                                       Model model) {
+
+        Category cat = categoryDao.findOne(categoryId);
+        newCheese.setCategory(cat);
 
         if (errors.hasErrors()) {
             model.addAttribute("title", "Add Cheese");
+            model.addAttribute("categories", categoryDao.findAll());
             return "cheese/add";
         }
 
