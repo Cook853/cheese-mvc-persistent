@@ -14,10 +14,10 @@ public class AddMenuItemForm {
 
     private Iterable<Cheese> cheeses;
 
-    @NotNull
+    @NotNull(message = "MenuId not linked")
     private int menuId;
 
-    @NotNull
+    @NotNull(message = "CheeseId not linked")
     private int cheeseId;
 
     public AddMenuItemForm() {
@@ -40,7 +40,15 @@ public class AddMenuItemForm {
         return menuId;
     }
 
+    public void setMenuId(int menuId) {
+        this.menuId = menuId;
+    }
+
     public int getCheeseId() {
         return cheeseId;
+    }
+
+    public void setCheeseId(int cheeseId) {
+        this.cheeseId = cheeseId;
     }
 }
