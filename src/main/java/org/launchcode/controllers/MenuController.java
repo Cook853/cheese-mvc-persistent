@@ -61,8 +61,8 @@ public class MenuController {
         return "redirect:view/" + menu.getId();
     }
 
-    @RequestMapping(value = "view")
-    public String view(@PathVariable int id, Model model) {
+    @RequestMapping(value = "view/{id}", method = RequestMethod.GET)
+    public String viewMenu(@PathVariable int id, Model model) {
         Menu menu = menuDao.findOne(id);
 
         model.addAttribute("menu", menu);
